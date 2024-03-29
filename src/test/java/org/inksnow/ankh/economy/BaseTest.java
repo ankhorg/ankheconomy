@@ -1,0 +1,36 @@
+package org.inksnow.ankh.economy;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.UUID;
+import org.inksnow.ankh.economy.api.AnkhEconomy;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+public class BaseTest {
+  @Test
+  public void test() {
+    TestPlayer testPlayerA = new TestPlayer(UUID.randomUUID());
+
+    AnkhEconomy.set(testPlayerA, null, BigDecimal.valueOf(233));
+    Assertions.assertEquals(BigDecimal.valueOf(233), AnkhEconomy.get(testPlayerA, null));
+
+    AnkhEconomy.add(testPlayerA, null, BigDecimal.valueOf(100));
+    Assertions.assertEquals(BigDecimal.valueOf(333), AnkhEconomy.get(testPlayerA, null));
+
+    Assertions.assertFalse(AnkhEconomy.subtract(testPlayerA, null, BigDecimal.valueOf(334)));
+    Assertions.assertEquals(BigDecimal.valueOf(333), AnkhEconomy.get(testPlayerA, null));
+
+    AnkhEconomy.add(testPlayerA, null, BigDecimal.valueOf(0.0001));
+    Assertions.assertEquals(
+        AnkhEconomy.render(testPlayerA, null, new BigDecimal("333.0001")),
+        AnkhEconomy.render(testPlayerA, null, AnkhEconomy.get(testPlayerA, null))
+    );
+  }
+
+  @BeforeAll
+  public static void load() throws IOException {
+    new AnkhEconomyImpl<>(new TestPlatform()).load();
+  }
+}

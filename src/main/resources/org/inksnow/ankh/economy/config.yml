@@ -1,0 +1,14 @@
+defaultCurrency: "money"
+
+vault:
+  fractionalDigits: 2
+  plural: "$"
+  singular: "$"
+
+currencies:
+  money:
+    name: "小钱钱"
+    type: inkdb
+    properties:
+      storage: "/home/inkerbot/IdeaProjects/ankh-economy/run/inkdb"
+      prefix: "ankh-economy.money."
