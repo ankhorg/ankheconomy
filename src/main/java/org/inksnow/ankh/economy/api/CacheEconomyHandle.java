@@ -1,8 +1,10 @@
 package org.inksnow.ankh.economy.api;
 
-public interface CacheEconomyHandle<P> extends EconomyHandle<P> {
+import org.bukkit.OfflinePlayer;
 
-  void onPlayerJoin(P player);
+public interface CacheEconomyHandle extends EconomyHandle {
 
-  void onPlayerQuit(P player);
+  void onPlayerJoin(OfflinePlayer player);
+
+  void onPlayerQuit(OfflinePlayer player);
 }

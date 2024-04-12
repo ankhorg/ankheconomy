@@ -1,17 +1,17 @@
 package org.inksnow.ankh.economy;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.UUID;
+import org.bukkit.entity.Player;
 import org.inksnow.ankh.economy.api.AnkhEconomy;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BaseTest {
   @Test
   public void test() {
-    TestPlayer testPlayerA = new TestPlayer(UUID.randomUUID());
+    TestPluginLoad.ensureSetup();
+
+    Player testPlayerA = TestPluginLoad.server().addPlayer("testPlayerA");
 
     AnkhEconomy.set(testPlayerA, null, BigDecimal.valueOf(233));
     Assertions.assertEquals(BigDecimal.valueOf(233), AnkhEconomy.get(testPlayerA, null));
@@ -27,10 +27,5 @@ public class BaseTest {
         AnkhEconomy.render(testPlayerA, null, new BigDecimal("333.0001")),
         AnkhEconomy.render(testPlayerA, null, AnkhEconomy.get(testPlayerA, null))
     );
-  }
-
-  @BeforeAll
-  public static void load() throws IOException {
-    new AnkhEconomyImpl<>(new TestPlatform()).load();
   }
 }

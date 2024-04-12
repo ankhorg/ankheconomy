@@ -2,25 +2,23 @@ package org.inksnow.ankh.economy.command;
 
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
-import org.inksnow.ankh.economy.Platform;
+import org.bukkit.entity.Player;
 import org.inksnow.ankh.economy.api.AnkhEconomy;
 
 @RequiredArgsConstructor
-public class BalanceCommand<P> {
+public class BalanceCommand {
 
-  private final Platform<P> platform;
-
-  public void execute(P sender, String[] args) {
+  public void execute(Player sender, String[] args) {
     if (sender == null) {
-      platform.sendMessage(sender, "This command can only be used by players");
+      sender.sendMessage("This command can only be used by players");
       return;
     }
-    if (!platform.checkPermission(sender, "ankh.economy.command.balance")) {
-      platform.sendMessage(sender, "You do not have permission to use this command");
+    if (!sender.hasPermission("ankh.economy.command.balance")) {
+      sender.sendMessage("You do not have permission to use this command");
       return;
     }
     if (args.length != 0 && args.length != 1) {
-      platform.sendMessage(sender, "Usage: /balance [currency]");
+      sender.sendMessage("Usage: /balance [currency]");
       return;
     }
     String currency = (args.length == 1) ? args[0] : null;
@@ -33,6 +31,6 @@ public class BalanceCommand<P> {
     }
     builder.append(": ").append(AnkhEconomy.render(sender, currency, balance));
 
-    platform.sendMessage(sender, builder.toString());
+    sender.sendMessage(builder.toString());
   }
 }

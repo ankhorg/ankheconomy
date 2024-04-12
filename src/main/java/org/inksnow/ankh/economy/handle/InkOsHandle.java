@@ -1,4 +1,4 @@
-package org.inksnow.ankh.economy.bukkit.handle;
+package org.inksnow.ankh.economy.handle;
 
 import bot.inker.inkos.InkOS;
 import java.math.BigDecimal;
@@ -8,13 +8,11 @@ import java.util.function.Function;
 import lombok.SneakyThrows;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.inksnow.ankh.economy.Platform;
 import org.inksnow.ankh.economy.api.AtomicEconomyHandle;
 import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
 
-public class InkOsHandle implements EconomyHandle<OfflinePlayer>,
-    AtomicEconomyHandle<OfflinePlayer> {
+public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   private final Map<Player, Object> playerLocks = new WeakHashMap<>();
   private final Function<Player, Object> createPlayerLockFunction = player -> new Object();
 
@@ -97,8 +95,8 @@ public class InkOsHandle implements EconomyHandle<OfflinePlayer>,
 
     @Override
     @SneakyThrows
-    public <P> EconomyHandle<P> create(Platform<P> platform, CurrencyConfig economyConfig) {
-      return (EconomyHandle<P>) new InkOsHandle(economyConfig);
+    public EconomyHandle create(CurrencyConfig economyConfig) {
+      return new InkOsHandle(economyConfig);
     }
   }
 }

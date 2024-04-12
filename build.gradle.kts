@@ -19,7 +19,8 @@ allprojects {
         mavenCentral()
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") {
             content {
-                includeGroup("org.bukkit")
+                includeModule("org.bukkit", "bukkit")
+                includeModule("org.spigotmc", "spigot-api")
             }
         }
         maven("https://repo.extendedclip.com/content/repositories/placeholderapi/") {
@@ -38,6 +39,11 @@ allprojects {
                 includeModule("bot.inker.inkos", "bukkit-api")
             }
         }
+        maven("https://jitpack.io/") {
+            content {
+                includeModule("com.github.MockBukkit", "MockBukkit")
+            }
+        }
     }
 
     dependencies {
@@ -47,18 +53,42 @@ allprojects {
 
         testCompileOnly("org.projectlombok:lombok:1.18.32")
         testAnnotationProcessor("org.projectlombok:lombok:1.18.32")
+
+        testImplementation(platform("org.junit:junit-bom:5.9.1"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+    }
+
+    tasks.test {
+        useJUnitPlatform()
     }
 }
 
 dependencies {
-    implementation("bot.inker.inkos:core:1.0.13")
+    implementation("bot.inker.inkos:core:1.0.16")
     implementation("bot.inker.acj:runtime:1.5")
-    implementation("org.yaml:snakeyaml:2.2")
+    // implementation("org.yaml:snakeyaml:2.2")
 
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    compileOnly("bot.inker.inkos:bukkit-api:1.0.16")
+    compileOnly("org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("net.luckperms:api:5.4")
+    compileOnly("me.clip:placeholderapi:2.11.5")
+
+    testImplementation("com.github.MockBukkit:MockBukkit:v1.16-SNAPSHOT")
+}
+
+tasks.processResources {
+    filesMatching("plugin.yml") {
+        expand("version" to project.version)
+    }
 }
 
 tasks.test {
-    useJUnitPlatform()
+    val directory = rootProject.layout.projectDirectory.dir("run").dir("test")
+
+    doFirst {
+        mkdir(directory)
+    }
+
+    workingDir(directory)
 }

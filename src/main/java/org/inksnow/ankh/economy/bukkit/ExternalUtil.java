@@ -1,4 +1,4 @@
-package org.inksnow.ankh.economy.bukkit.util;
+package org.inksnow.ankh.economy.bukkit;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;

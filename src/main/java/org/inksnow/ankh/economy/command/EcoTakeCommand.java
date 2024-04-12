@@ -2,26 +2,24 @@ package org.inksnow.ankh.economy.command;
 
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
-import org.inksnow.ankh.economy.Platform;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.inksnow.ankh.economy.api.AnkhEconomy;
 
 @RequiredArgsConstructor
-public class EcoTakeCommand<P> {
-
-  private final Platform<P> platform;
-
-  public void execute(P sender, String[] args) {
-    if (sender != null && !platform.checkPermission(sender, "ankh.economy.command.take")) {
-      platform.sendMessage(sender, "You do not have permission to use this command");
+public class EcoTakeCommand {
+  public void execute(Player sender, String[] args) {
+    if (sender != null && !sender.hasPermission("ankh.economy.command.take")) {
+      sender.sendMessage("You do not have permission to use this command");
       return;
     }
     if (args.length != 2 && args.length != 3) {
-      platform.sendMessage(sender, "Usage: /ecotake <player> <amount> [currency]");
+      sender.sendMessage("Usage: /ecotake <player> <amount> [currency]");
       return;
     }
-    P player = platform.nameToPlayer(args[0]);
+    Player player = Bukkit.getPlayer(args[0]);
     if (player == null) {
-      platform.sendMessage(sender, "Player " + args[0] + " not online");
+      sender.sendMessage("Player " + args[0] + " not online");
       return;
     }
     String currency = (args.length == 3) ? args[2] : null;
@@ -30,14 +28,14 @@ public class EcoTakeCommand<P> {
     try {
       amount = new BigDecimal(args[1]);
     } catch (NumberFormatException e) {
-      platform.sendMessage(sender, "Invalid amount: " + args[1]);
+      sender.sendMessage("Invalid amount: " + args[1]);
       return;
     }
 
     if (AnkhEconomy.subtract(player, currency, amount)) {
-      platform.sendMessage(sender, "Success");
+      sender.sendMessage("Success");
     } else {
-      platform.sendMessage(sender, "Not enough balance");
+      sender.sendMessage("Not enough balance");
     }
   }
 }

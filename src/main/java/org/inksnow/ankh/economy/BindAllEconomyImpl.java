@@ -3,16 +3,17 @@ package org.inksnow.ankh.economy;
 import java.math.BigDecimal;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.OfflinePlayer;
 import org.inksnow.ankh.economy.api.AnkhEconomyApi;
 import org.inksnow.ankh.economy.api.BindAllEconomyApi;
 import org.inksnow.ankh.economy.api.BindCurrencyEconomyApi;
 import org.inksnow.ankh.economy.api.BindPlayerEconomyApi;
 
 @RequiredArgsConstructor
-public class BindAllEconomyImpl<P> implements BindAllEconomyApi<P> {
+public class BindAllEconomyImpl implements BindAllEconomyApi {
 
-  private final AnkhEconomyImpl<P> ankhEconomy;
-  private final P player;
+  private final AnkhEconomyImpl ankhEconomy;
+  private final OfflinePlayer player;
   private final String currency;
 
   @Override
@@ -41,17 +42,17 @@ public class BindAllEconomyImpl<P> implements BindAllEconomyApi<P> {
   }
 
   @Override
-  public @NonNull BindCurrencyEconomyApi<P> unbindPlayer() {
-    return new BindCurrencyEconomyImpl<>(ankhEconomy, currency);
+  public @NonNull BindCurrencyEconomyApi unbindPlayer() {
+    return new BindCurrencyEconomyImpl(ankhEconomy, currency);
   }
 
   @Override
-  public @NonNull BindPlayerEconomyApi<P> unbindCurrency() {
-    return new BindPlayerEconomyImpl<>(ankhEconomy, player);
+  public @NonNull BindPlayerEconomyApi unbindCurrency() {
+    return new BindPlayerEconomyImpl(ankhEconomy, player);
   }
 
   @Override
-  public @NonNull AnkhEconomyApi<P> unbind() {
+  public @NonNull AnkhEconomyApi unbind() {
     return ankhEconomy;
   }
 }

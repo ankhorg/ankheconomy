@@ -1,0 +1,4 @@
+org.inksnow.ankh.economy.handle.InkdbHandle$LeveldbFactory
+org.inksnow.ankh.economy.handle.InkdbHandle$InkdbFactory
+org.inksnow.ankh.economy.handle.InkOsHandle$Factory
+org.inksnow.ankh.economy.bukkit.luckperms.LuckPermsMetadataHandleFactory

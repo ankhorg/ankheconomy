@@ -15,7 +15,7 @@ import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
 
 @Log
-public class LuckPermsMetadataHandle implements EconomyHandle<OfflinePlayer> {
+public class LuckPermsMetadataHandle implements EconomyHandle {
   private CurrencyConfig config;
   private final String metadataKey;
 

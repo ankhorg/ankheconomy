@@ -2,10 +2,10 @@ package org.inksnow.ankh.economy.api;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import org.inksnow.ankh.economy.Platform;
+import org.bukkit.OfflinePlayer;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
 
-public interface EconomyHandle<P> {
+public interface EconomyHandle {
 
   CurrencyConfig config();
 
@@ -15,17 +15,17 @@ public interface EconomyHandle<P> {
 
   void reload(CurrencyConfig economyConfig);
 
-  boolean hasAccount(P player);
+  boolean hasAccount(OfflinePlayer player);
 
-  BigDecimal get(P player);
+  BigDecimal get(OfflinePlayer player);
 
-  void set(P player, BigDecimal amount);
+  void set(OfflinePlayer player, BigDecimal amount);
 
   interface Factory {
 
     String name();
 
-    <P> EconomyHandle<P> create(Platform<P> platform, CurrencyConfig economyConfig)
+    EconomyHandle create(CurrencyConfig economyConfig)
         throws IOException;
   }
 }

@@ -1,22 +1,23 @@
 package org.inksnow.ankh.economy.api;
 
 import java.math.BigDecimal;
+import org.bukkit.OfflinePlayer;
 
-public interface BindCurrencyEconomyApi<P> {
+public interface BindCurrencyEconomyApi {
 
-  String render(P player, BigDecimal amount);
+  String render(OfflinePlayer player, BigDecimal amount);
 
-  BigDecimal get(P player);
+  BigDecimal get(OfflinePlayer player);
 
-  void set(P player, BigDecimal amount);
+  void set(OfflinePlayer player, BigDecimal amount);
 
-  void add(P player, BigDecimal amount);
+  void add(OfflinePlayer player, BigDecimal amount);
 
-  boolean subtract(P player, BigDecimal amount);
+  boolean subtract(OfflinePlayer player, BigDecimal amount);
 
-  BindAllEconomyApi<P> bindPlayer(P player);
+  BindAllEconomyApi bindPlayer(OfflinePlayer player);
 
-  AnkhEconomyApi<P> unbindCurrency();
+  AnkhEconomyApi unbindCurrency();
 
-  AnkhEconomyApi<P> unbind();
+  AnkhEconomyApi unbind();
 }

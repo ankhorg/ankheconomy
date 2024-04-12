@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.UUID;
 import lombok.extern.java.Log;
-import org.inksnow.ankh.economy.Platform;
+import org.bukkit.OfflinePlayer;
 import org.inksnow.ankh.economy.api.AtomicEconomyHandle;
 import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
@@ -18,15 +18,12 @@ import org.inksnow.ankh.economy.util.FastBigDecimalUtil;
 import org.inksnow.ankh.economy.util.FastUuidUtil;
 
 @Log
-public class InkdbHandle<P> implements EconomyHandle<P>, AtomicEconomyHandle<P> {
-
-  private final Platform<P> platform;
+public class InkdbHandle implements EconomyHandle, AtomicEconomyHandle {
   private final IBackend inkOs;
   private final byte[] prefix;
   private CurrencyConfig config;
 
-  private InkdbHandle(Platform<P> platform, CurrencyConfig config, IBackend inkOs) {
-    this.platform = platform;
+  private InkdbHandle(CurrencyConfig config, IBackend inkOs) {
     this.config = config;
     this.inkOs = inkOs;
 
@@ -63,27 +60,27 @@ public class InkdbHandle<P> implements EconomyHandle<P>, AtomicEconomyHandle<P> 
   }
 
   @Override
-  public boolean hasAccount(P player) {
-    byte[] key = FastUuidUtil.uuidToBytesKey(platform.playerUuid(player), this.prefix);
+  public boolean hasAccount(OfflinePlayer player) {
+    byte[] key = FastUuidUtil.uuidToBytesKey(player.getUniqueId(), this.prefix);
     return inkOs.get(key) != null;
   }
 
   @Override
-  public BigDecimal get(P player) {
-    byte[] key = FastUuidUtil.uuidToBytesKey(platform.playerUuid(player), this.prefix);
+  public BigDecimal get(OfflinePlayer player) {
+    byte[] key = FastUuidUtil.uuidToBytesKey(player.getUniqueId(), this.prefix);
     byte[] amountBytes = inkOs.get(key);
     return amountBytes == null ? BigDecimal.ZERO : FastBigDecimalUtil.fromBytes(amountBytes);
   }
 
   @Override
-  public void set(P player, BigDecimal amount) {
-    byte[] key = FastUuidUtil.uuidToBytesKey(platform.playerUuid(player), this.prefix);
+  public void set(OfflinePlayer player, BigDecimal amount) {
+    byte[] key = FastUuidUtil.uuidToBytesKey(player.getUniqueId(), this.prefix);
     inkOs.put(key, FastBigDecimalUtil.toBytes(amount));
   }
 
   @Override
-  public boolean compareAndSet(P player, BigDecimal expect, BigDecimal update) {
-    UUID id = platform.playerUuid(player);
+  public boolean compareAndSet(OfflinePlayer player, BigDecimal expect, BigDecimal update) {
+    UUID id = player.getUniqueId();
     byte[] keyBytes = FastUuidUtil.uuidToBytesKey(id, this.prefix);
     byte[] expectBytes = FastBigDecimalUtil.toBytes(expect);
     byte[] updateBytes = FastBigDecimalUtil.toBytes(update);
@@ -122,9 +119,9 @@ public class InkdbHandle<P> implements EconomyHandle<P>, AtomicEconomyHandle<P> 
     public abstract IBackend createBackend(String storageDirectory) throws IOException;
 
     @Override
-    public <P> EconomyHandle<P> create(Platform<P> platform, CurrencyConfig currencyConfig)
+    public EconomyHandle create(CurrencyConfig currencyConfig)
         throws IOException {
-      return new InkdbHandle<>(platform, currencyConfig,
+      return new InkdbHandle(currencyConfig,
           createBackend(currencyConfig.getProperties().get("storage")));
     }
   }

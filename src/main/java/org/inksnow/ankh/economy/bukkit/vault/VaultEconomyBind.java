@@ -16,13 +16,13 @@ import org.inksnow.ankh.economy.api.EconomyHandle;
 
 public class VaultEconomyBind implements Economy {
   private static final Logger logger = Logger.getLogger("AnkhEconomy");
-  private final AnkhEconomyImpl<OfflinePlayer> ankhEconomy;
+  private final AnkhEconomyImpl ankhEconomy;
 
-  public VaultEconomyBind(AnkhEconomyImpl<OfflinePlayer> ankhEconomy) {
+  public VaultEconomyBind(AnkhEconomyImpl ankhEconomy) {
     this.ankhEconomy = ankhEconomy;
   }
 
-  private EconomyHandle<OfflinePlayer> defaultHandle() {
+  private EconomyHandle defaultHandle() {
     return ankhEconomy.handle(ankhEconomy.config().getDefaultCurrency());
   }
 
@@ -151,10 +151,10 @@ public class VaultEconomyBind implements Economy {
 
   @Override
   public EconomyResponse withdrawPlayer(OfflinePlayer player, double amount) {
-    EconomyHandle<OfflinePlayer> handle = defaultHandle();
+    EconomyHandle handle = defaultHandle();
 
     if (handle instanceof AtomicEconomyHandle) {
-      AtomicEconomyHandle<OfflinePlayer> atomicHandle = (AtomicEconomyHandle<OfflinePlayer>) handle;
+      AtomicEconomyHandle atomicHandle = (AtomicEconomyHandle) handle;
       while (true) {
         BigDecimal currentBalance = handle.get(player);
         BigDecimal balanceAfterProcess = currentBalance.subtract(BigDecimal.valueOf(amount));
@@ -213,10 +213,10 @@ public class VaultEconomyBind implements Economy {
 
   @Override
   public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
-    EconomyHandle<OfflinePlayer> handle = defaultHandle();
+    EconomyHandle handle = defaultHandle();
 
     if (handle instanceof AtomicEconomyHandle) {
-      AtomicEconomyHandle<OfflinePlayer> atomicHandle = (AtomicEconomyHandle<OfflinePlayer>) handle;
+      AtomicEconomyHandle atomicHandle = (AtomicEconomyHandle) handle;
       while (true) {
         BigDecimal currentBalance = handle.get(player);
         BigDecimal balanceAfterProcess = currentBalance.add(BigDecimal.valueOf(amount));

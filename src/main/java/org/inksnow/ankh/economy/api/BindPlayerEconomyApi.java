@@ -2,7 +2,7 @@ package org.inksnow.ankh.economy.api;
 
 import java.math.BigDecimal;
 
-public interface BindPlayerEconomyApi<P> {
+public interface BindPlayerEconomyApi {
 
   String render(String currency, BigDecimal amount);
 
@@ -14,9 +14,9 @@ public interface BindPlayerEconomyApi<P> {
 
   boolean subtract(String currency, BigDecimal amount);
 
-  AnkhEconomyApi<P> unbindPlayer();
+  AnkhEconomyApi unbindPlayer();
 
-  BindAllEconomyApi<P> bindCurrency(String currency);
+  BindAllEconomyApi bindCurrency(String currency);
 
-  AnkhEconomyApi<P> unbind();
+  AnkhEconomyApi unbind();
 }

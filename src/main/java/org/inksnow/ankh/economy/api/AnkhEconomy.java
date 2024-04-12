@@ -1,6 +1,8 @@
 package org.inksnow.ankh.economy.api;
 
 import java.math.BigDecimal;
+import org.bukkit.OfflinePlayer;
+import org.jetbrains.annotations.ApiStatus.Internal;
 
 @SuppressWarnings("rawtypes") // override by platform
 public final class AnkhEconomy {
@@ -11,51 +13,54 @@ public final class AnkhEconomy {
     throw new UnsupportedOperationException();
   }
 
-  public static String render(Object player, String currency, BigDecimal amount) {
+  public static String render(OfflinePlayer player, String currency, BigDecimal amount) {
     return instance().render(player, currency, amount);
   }
 
-  public static BigDecimal get(Object player, String currency) {
+  public static BigDecimal get(OfflinePlayer player, String currency) {
     return instance().get(player, currency);
   }
 
-  public static void set(Object player, String currency, BigDecimal amount) {
+  public static void set(OfflinePlayer player, String currency, BigDecimal amount) {
     instance().set(player, currency, amount);
   }
 
-  public static void add(Object player, String currency, BigDecimal amount) {
+  public static void add(OfflinePlayer player, String currency, BigDecimal amount) {
     instance().add(player, currency, amount);
   }
 
-  public static boolean subtract(Object player, String currency, BigDecimal amount) {
+  public static boolean subtract(OfflinePlayer player, String currency, BigDecimal amount) {
     return instance().subtract(player, currency, amount);
   }
 
-  public static <P> BindPlayerEconomyApi<P> bindPlayer(P player) {
-    return (BindPlayerEconomyApi<P>) instance().bindPlayer(player);
+  public static BindPlayerEconomyApi bindPlayer(OfflinePlayer player) {
+    return instance().bindPlayer(player);
   }
 
-  public static <P> BindCurrencyEconomyApi<P> bindCurrency(String currency) {
-    return (BindCurrencyEconomyApi<P>) instance().bindCurrency(currency);
+  public static BindCurrencyEconomyApi bindCurrency(String currency) {
+    return instance().bindCurrency(currency);
   }
 
-  public static <P> BindAllEconomyApi<P> bindAll(P player, String currency) {
-    return (BindAllEconomyApi<P>) instance().bindAll(player, currency);
+  public static BindAllEconomyApi bindAll(OfflinePlayer player, String currency) {
+    return instance().bindAll(player, currency);
   }
 
-  @SuppressWarnings("checkstyle:MethodName") // internal use method
-  public static synchronized void _setInstance(AnkhEconomyApi api) {
-    if (AnkhEconomy.api == null) {
-      AnkhEconomy.api = api;
-    } else {
-      throw new IllegalArgumentException("AnkhEconomyApi instance is already set");
-    }
-  }
-
-  public static <P> AnkhEconomyApi<P> instance() {
+  public static AnkhEconomyApi instance() {
     if (api == null) {
       throw new IllegalStateException("AnkhEconomyApi instance is not set");
     }
     return api;
+  }
+
+  @SuppressWarnings("checkstyle:TypeName") // internal use class
+  public static final class $internal$actions {
+    @SuppressWarnings("checkstyle:MethodName") // internal use method
+    public static synchronized void setInstance(AnkhEconomyApi api) {
+      if (AnkhEconomy.api == null) {
+        AnkhEconomy.api = api;
+      } else {
+        throw new IllegalArgumentException("AnkhEconomyApi instance is already set");
+      }
+    }
   }
 }
