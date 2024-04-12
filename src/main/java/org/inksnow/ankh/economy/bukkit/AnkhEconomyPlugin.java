@@ -22,6 +22,7 @@ import org.inksnow.ankh.economy.command.EcoTakeCommand;
 import org.inksnow.ankh.economy.command.PayCommand;
 
 public class AnkhEconomyPlugin extends JavaPlugin {
+
   private static final Logger logger = Logger.getLogger("AnkhEconomy");
 
   private AnkhEconomyImpl ankhEconomy;

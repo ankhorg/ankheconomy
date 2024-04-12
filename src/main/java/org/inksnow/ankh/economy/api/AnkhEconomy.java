@@ -2,7 +2,6 @@ package org.inksnow.ankh.economy.api;
 
 import java.math.BigDecimal;
 import org.bukkit.OfflinePlayer;
-import org.jetbrains.annotations.ApiStatus.Internal;
 
 @SuppressWarnings("rawtypes") // override by platform
 public final class AnkhEconomy {
@@ -54,6 +53,7 @@ public final class AnkhEconomy {
 
   @SuppressWarnings("checkstyle:TypeName") // internal use class
   public static final class $internal$actions {
+
     @SuppressWarnings("checkstyle:MethodName") // internal use method
     public static synchronized void setInstance(AnkhEconomyApi api) {
       if (AnkhEconomy.api == null) {

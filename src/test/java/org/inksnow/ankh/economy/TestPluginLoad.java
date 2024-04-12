@@ -6,6 +6,7 @@ import org.inksnow.ankh.economy.bukkit.AnkhEconomyPlugin;
 import org.junit.jupiter.api.BeforeAll;
 
 public class TestPluginLoad {
+
   private static ServerMock server;
   private static AnkhEconomyPlugin plugin;
 

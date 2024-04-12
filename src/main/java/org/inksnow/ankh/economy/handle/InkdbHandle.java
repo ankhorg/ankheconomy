@@ -19,6 +19,7 @@ import org.inksnow.ankh.economy.util.FastUuidUtil;
 
 @Log
 public class InkdbHandle implements EconomyHandle, AtomicEconomyHandle {
+
   private final IBackend inkOs;
   private final byte[] prefix;
   private CurrencyConfig config;

@@ -8,6 +8,7 @@ import org.inksnow.ankh.economy.api.AnkhEconomy;
 
 @RequiredArgsConstructor
 public class EcoSetCommand {
+
   public void execute(Player sender, String[] args) {
     if (sender != null && !sender.hasPermission("ankh.economy.command.set")) {
       sender.sendMessage("You do not have permission to use this command");

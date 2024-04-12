@@ -15,6 +15,7 @@ import org.inksnow.ankh.economy.api.AtomicEconomyHandle;
 import org.inksnow.ankh.economy.api.EconomyHandle;
 
 public class VaultEconomyBind implements Economy {
+
   private static final Logger logger = Logger.getLogger("AnkhEconomy");
   private final AnkhEconomyImpl ankhEconomy;
 

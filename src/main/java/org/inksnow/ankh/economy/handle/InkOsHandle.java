@@ -13,6 +13,7 @@ import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
 
 public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
+
   private final Map<Player, Object> playerLocks = new WeakHashMap<>();
   private final Function<Player, Object> createPlayerLockFunction = player -> new Object();
 
@@ -88,6 +89,7 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   }
 
   public static class Factory implements EconomyHandle.Factory {
+
     @Override
     public String name() {
       return "inkos";

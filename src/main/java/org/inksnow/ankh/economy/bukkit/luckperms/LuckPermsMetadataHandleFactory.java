@@ -6,6 +6,7 @@ import org.inksnow.ankh.economy.config.CurrencyConfig;
 
 @SuppressWarnings("rawtypes")
 public class LuckPermsMetadataHandleFactory implements EconomyHandle.Factory {
+
   @Override
   public String name() {
     return "luckperms";

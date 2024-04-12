@@ -16,8 +16,9 @@ import org.inksnow.ankh.economy.config.CurrencyConfig;
 
 @Log
 public class LuckPermsMetadataHandle implements EconomyHandle {
-  private CurrencyConfig config;
+
   private final String metadataKey;
+  private CurrencyConfig config;
 
 
   public LuckPermsMetadataHandle(CurrencyConfig config) {
@@ -39,8 +40,8 @@ public class LuckPermsMetadataHandle implements EconomyHandle {
   public boolean canReload(CurrencyConfig economyConfig) {
     return config.getType().equals(economyConfig.getType())
         && config.getProperties()
-            .get("metadataKey")
-            .equals(economyConfig.getProperties().get("metadataKey"));
+        .get("metadataKey")
+        .equals(economyConfig.getProperties().get("metadataKey"));
   }
 
   @Override

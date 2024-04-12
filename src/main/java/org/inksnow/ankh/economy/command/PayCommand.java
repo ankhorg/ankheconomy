@@ -8,6 +8,7 @@ import org.inksnow.ankh.economy.api.AnkhEconomy;
 
 @RequiredArgsConstructor
 public class PayCommand {
+
   public void execute(Player sender, String[] args) {
     if (sender == null) {
       sender.sendMessage("This command can only be used by players");

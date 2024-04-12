@@ -8,6 +8,7 @@ import org.inksnow.ankh.economy.api.AnkhEconomy;
 
 @RequiredArgsConstructor
 public class EcoTakeCommand {
+
   public void execute(Player sender, String[] args) {
     if (sender != null && !sender.hasPermission("ankh.economy.command.take")) {
       sender.sendMessage("You do not have permission to use this command");

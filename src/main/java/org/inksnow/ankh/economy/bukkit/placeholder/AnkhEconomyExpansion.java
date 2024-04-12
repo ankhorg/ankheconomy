@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 @Log
 @RequiredArgsConstructor
 public class AnkhEconomyExpansion extends PlaceholderExpansion {
+
   private final AnkhEconomyPlugin plugin;
 
   @Override

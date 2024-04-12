@@ -7,6 +7,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 @Accessors(fluent = true)
 public class ExternalUtil {
+
   @Getter(lazy = true)
   private final boolean hasVault = hasClass("net.milkbowl.vault.economy.Economy");
 

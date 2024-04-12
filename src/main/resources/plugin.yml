@@ -10,31 +10,31 @@ version: ${version}
 folia-supported: true
 
 commands:
-    balance:
-        description: Check your balance
-        usage: /balance [currency]
-        permission: ankh.economy.command.balance
-    pay:
-        description: Pay someone
-        usage: /pay <player> <amount> [currency]
-        permission: ankh.economy.command.pay
-    ecoget:
-        description: Get a player's balance
-        usage: /ecoget <player> [currency]
-        permission: ankh.economy.get
-    ecoset:
-        description: Set a player's balance
-        usage: /ecoset <player> <amount> [currency]
-        permission: ankh.economy.set
-    ecoadd:
-        description: Add to a player's balance
-        usage: /ecoadd <player> <amount> [currency]
-        permission: ankh.economy.add
-    ecotake:
-        description: Remove from a player's balance
-        usage: /ecotake <player> <amount>
-        permission: ankh.economy.remove
-    ecoreload:
-        description: Reload the plugin
-        usage: /ecoreload
-        permission: ankh.economy.reload
+  balance:
+    description: Check your balance
+    usage: /balance [currency]
+    permission: ankh.economy.command.balance
+  pay:
+    description: Pay someone
+    usage: /pay <player> <amount> [currency]
+    permission: ankh.economy.command.pay
+  ecoget:
+    description: Get a player's balance
+    usage: /ecoget <player> [currency]
+    permission: ankh.economy.get
+  ecoset:
+    description: Set a player's balance
+    usage: /ecoset <player> <amount> [currency]
+    permission: ankh.economy.set
+  ecoadd:
+    description: Add to a player's balance
+    usage: /ecoadd <player> <amount> [currency]
+    permission: ankh.economy.add
+  ecotake:
+    description: Remove from a player's balance
+    usage: /ecotake <player> <amount>
+    permission: ankh.economy.remove
+  ecoreload:
+    description: Reload the plugin
+    usage: /ecoreload
+    permission: ankh.economy.reload
