@@ -10,5 +10,5 @@ currencies:
     name: "小钱钱"
     type: inkdb
     properties:
-      storage: "/home/inkerbot/IdeaProjects/ankh-economy/run/inkdb"
+      storage: "plugins/AnkhEconomy/money.idb"
       prefix: "ankh-economy.money."
