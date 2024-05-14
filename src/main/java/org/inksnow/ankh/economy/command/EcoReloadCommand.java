@@ -12,7 +12,7 @@ public class EcoReloadCommand {
   private static final Logger logger = Logger.getLogger("AnkhEconomy");
 
   public void execute(CommandSender sender, String[] args) {
-    if (sender != null && !sender.hasPermission("ankh.economy.command.pay")) {
+    if (sender != null && !sender.hasPermission("ankh.economy.command.reload")) {
       sender.sendMessage("You do not have permission to use this command");
       return;
     }

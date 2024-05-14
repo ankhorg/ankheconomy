@@ -3,17 +3,18 @@ package org.inksnow.ankh.economy.bukkit.luckperms;
 import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.bukkit.ExternalUtil;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("rawtypes")
 public class LuckPermsMetadataHandleFactory implements EconomyHandle.Factory {
 
   @Override
-  public String name() {
+  public @NotNull String name() {
     return "luckperms";
   }
 
   @Override
-  public EconomyHandle create(CurrencyConfig economyConfig) {
+  public @NotNull EconomyHandle create(@NotNull CurrencyConfig economyConfig) {
     if (ExternalUtil.hasLuckPerms()) {
       return new LuckPermsMetadataHandle(economyConfig);
     } else {

@@ -48,8 +48,11 @@ allprojects {
 
     dependencies {
         checkstyle("com.puppycrawl.tools:checkstyle:10.14.2")
+
         compileOnly("org.projectlombok:lombok:1.18.32")
         annotationProcessor("org.projectlombok:lombok:1.18.32")
+
+        compileOnly("org.checkerframework:checker-qual:3.42.0")
 
         testCompileOnly("org.projectlombok:lombok:1.18.32")
         testAnnotationProcessor("org.projectlombok:lombok:1.18.32")

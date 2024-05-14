@@ -2,49 +2,56 @@ package org.inksnow.ankh.economy.api;
 
 import java.math.BigDecimal;
 import org.bukkit.OfflinePlayer;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-@SuppressWarnings("rawtypes") // override by platform
 public final class AnkhEconomy {
 
-  private static AnkhEconomyApi api;
+  private static @Nullable AnkhEconomyApi api;
 
   private AnkhEconomy() {
     throw new UnsupportedOperationException();
   }
 
-  public static String render(OfflinePlayer player, String currency, BigDecimal amount) {
+  public static @NonNull String render(@NonNull OfflinePlayer player, @Nullable String currency,
+      @NonNull BigDecimal amount) {
     return instance().render(player, currency, amount);
   }
 
-  public static BigDecimal get(OfflinePlayer player, String currency) {
+  public static @NonNull BigDecimal get(@NonNull OfflinePlayer player,
+      @Nullable String currency) {
     return instance().get(player, currency);
   }
 
-  public static void set(OfflinePlayer player, String currency, BigDecimal amount) {
+  public static void set(@NonNull OfflinePlayer player, @Nullable String currency,
+      @NonNull BigDecimal amount) {
     instance().set(player, currency, amount);
   }
 
-  public static void add(OfflinePlayer player, String currency, BigDecimal amount) {
+  public static void add(@NonNull OfflinePlayer player, @Nullable String currency,
+      @NonNull BigDecimal amount) {
     instance().add(player, currency, amount);
   }
 
-  public static boolean subtract(OfflinePlayer player, String currency, BigDecimal amount) {
+  public static boolean subtract(@NonNull OfflinePlayer player, @Nullable String currency,
+      @NonNull BigDecimal amount) {
     return instance().subtract(player, currency, amount);
   }
 
-  public static BindPlayerEconomyApi bindPlayer(OfflinePlayer player) {
+  public static @NonNull BindPlayerEconomyApi bindPlayer(@NonNull OfflinePlayer player) {
     return instance().bindPlayer(player);
   }
 
-  public static BindCurrencyEconomyApi bindCurrency(String currency) {
+  public static @NonNull BindCurrencyEconomyApi bindCurrency(@Nullable String currency) {
     return instance().bindCurrency(currency);
   }
 
-  public static BindAllEconomyApi bindAll(OfflinePlayer player, String currency) {
+  public static @NonNull BindAllEconomyApi bindAll(@NonNull OfflinePlayer player,
+      @Nullable String currency) {
     return instance().bindAll(player, currency);
   }
 
-  public static AnkhEconomyApi instance() {
+  public static @NonNull AnkhEconomyApi instance() {
     if (api == null) {
       throw new IllegalStateException("AnkhEconomyApi instance is not set");
     }
@@ -55,7 +62,7 @@ public final class AnkhEconomy {
   public static final class $internal$actions {
 
     @SuppressWarnings("checkstyle:MethodName") // internal use method
-    public static synchronized void setInstance(AnkhEconomyApi api) {
+    public static synchronized void setInstance(@NonNull AnkhEconomyApi api) {
       if (AnkhEconomy.api == null) {
         AnkhEconomy.api = api;
       } else {

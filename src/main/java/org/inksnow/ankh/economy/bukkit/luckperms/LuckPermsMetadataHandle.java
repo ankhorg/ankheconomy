@@ -13,6 +13,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
+import org.jetbrains.annotations.NotNull;
 
 @Log
 public class LuckPermsMetadataHandle implements EconomyHandle {
@@ -27,7 +28,7 @@ public class LuckPermsMetadataHandle implements EconomyHandle {
   }
 
   @Override
-  public CurrencyConfig config() {
+  public @NotNull CurrencyConfig config() {
     return config;
   }
 
@@ -37,7 +38,7 @@ public class LuckPermsMetadataHandle implements EconomyHandle {
   }
 
   @Override
-  public boolean canReload(CurrencyConfig economyConfig) {
+  public boolean canReload(@NotNull CurrencyConfig economyConfig) {
     return config.getType().equals(economyConfig.getType())
         && config.getProperties()
         .get("metadataKey")
@@ -45,12 +46,12 @@ public class LuckPermsMetadataHandle implements EconomyHandle {
   }
 
   @Override
-  public void reload(CurrencyConfig economyConfig) {
+  public void reload(@NotNull CurrencyConfig economyConfig) {
     config = economyConfig;
   }
 
   @Override
-  public boolean hasAccount(OfflinePlayer offlinePlayer) {
+  public boolean hasAccount(@NotNull OfflinePlayer offlinePlayer) {
     LuckPerms luckPerms = LuckPermsProvider.get();
     PlayerAdapter<Player> playerAdapter = luckPerms.getPlayerAdapter(Player.class);
     if (!offlinePlayer.isOnline()) {
@@ -73,7 +74,7 @@ public class LuckPermsMetadataHandle implements EconomyHandle {
   }
 
   @Override
-  public BigDecimal get(OfflinePlayer offlinePlayer) {
+  public @NotNull BigDecimal get(@NotNull OfflinePlayer offlinePlayer) {
     LuckPerms luckPerms = LuckPermsProvider.get();
     PlayerAdapter<Player> playerAdapter = luckPerms.getPlayerAdapter(Player.class);
     String valueStr;
@@ -99,7 +100,7 @@ public class LuckPermsMetadataHandle implements EconomyHandle {
   }
 
   @Override
-  public void set(OfflinePlayer offlinePlayer, BigDecimal amount) {
+  public void set(@NotNull OfflinePlayer offlinePlayer, @NotNull BigDecimal amount) {
     LuckPerms luckPerms = LuckPermsProvider.get();
     PlayerAdapter<Player> playerAdapter = luckPerms.getPlayerAdapter(Player.class);
     User user;

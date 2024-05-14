@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.inksnow.ankh.economy.api.AtomicEconomyHandle;
 import org.inksnow.ankh.economy.api.EconomyHandle;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
+import org.jetbrains.annotations.NotNull;
 
 public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
 
@@ -25,7 +26,7 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   }
 
   @Override
-  public CurrencyConfig config() {
+  public @NotNull CurrencyConfig config() {
     return config;
   }
 
@@ -35,18 +36,18 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   }
 
   @Override
-  public boolean canReload(CurrencyConfig economyConfig) {
+  public boolean canReload(@NotNull CurrencyConfig economyConfig) {
     return config.getType().equals(economyConfig.getType());
   }
 
   @Override
-  public void reload(CurrencyConfig config) {
+  public void reload(@NotNull CurrencyConfig config) {
     this.config = config;
     this.key = config.getProperties().get("key");
   }
 
   @Override
-  public boolean hasAccount(OfflinePlayer offlinePlayer) {
+  public boolean hasAccount(@NotNull OfflinePlayer offlinePlayer) {
     if (!offlinePlayer.isOnline()) {
       throw new IllegalArgumentException("Player must be online");
     }
@@ -55,7 +56,7 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   }
 
   @Override
-  public BigDecimal get(OfflinePlayer offlinePlayer) {
+  public @NotNull BigDecimal get(@NotNull OfflinePlayer offlinePlayer) {
     if (!offlinePlayer.isOnline()) {
       throw new IllegalArgumentException("Player must be online");
     }
@@ -64,7 +65,7 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   }
 
   @Override
-  public void set(OfflinePlayer offlinePlayer, BigDecimal amount) {
+  public void set(@NotNull OfflinePlayer offlinePlayer, @NotNull BigDecimal amount) {
     if (!offlinePlayer.isOnline()) {
       throw new IllegalArgumentException("Player must be online");
     }
@@ -73,7 +74,7 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   }
 
   @Override
-  public boolean compareAndSet(OfflinePlayer offlinePlayer, BigDecimal expect, BigDecimal update) {
+  public boolean compareAndSet(@NotNull OfflinePlayer offlinePlayer, @NotNull BigDecimal expect, @NotNull BigDecimal update) {
     if (!offlinePlayer.isOnline()) {
       throw new IllegalArgumentException("Player must be online");
     }
@@ -91,13 +92,13 @@ public class InkOsHandle implements EconomyHandle, AtomicEconomyHandle {
   public static class Factory implements EconomyHandle.Factory {
 
     @Override
-    public String name() {
+    public @NotNull String name() {
       return "inkos";
     }
 
     @Override
     @SneakyThrows
-    public EconomyHandle create(CurrencyConfig economyConfig) {
+    public @NotNull EconomyHandle create(@NotNull CurrencyConfig economyConfig) {
       return new InkOsHandle(economyConfig);
     }
   }

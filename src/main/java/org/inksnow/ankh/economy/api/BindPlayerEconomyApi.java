@@ -1,22 +1,24 @@
 package org.inksnow.ankh.economy.api;
 
 import java.math.BigDecimal;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public interface BindPlayerEconomyApi {
 
-  String render(String currency, BigDecimal amount);
+  @NonNull String render(@Nullable String currency, @NonNull BigDecimal amount);
 
-  BigDecimal get(String currency);
+  @NonNull BigDecimal get(@Nullable String currency);
 
-  void set(String currency, BigDecimal amount);
+  void set(@Nullable String currency, @NonNull BigDecimal amount);
 
-  void add(String currency, BigDecimal amount);
+  void add(@Nullable String currency, @NonNull BigDecimal amount);
 
-  boolean subtract(String currency, BigDecimal amount);
+  boolean subtract(@Nullable String currency, @NonNull BigDecimal amount);
 
-  AnkhEconomyApi unbindPlayer();
+  @NonNull AnkhEconomyApi unbindPlayer();
 
-  BindAllEconomyApi bindCurrency(String currency);
+  @NonNull BindAllEconomyApi bindCurrency(@Nullable String currency);
 
-  AnkhEconomyApi unbind();
+  @NonNull AnkhEconomyApi unbind();
 }

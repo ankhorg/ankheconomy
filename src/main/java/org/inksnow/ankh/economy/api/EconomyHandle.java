@@ -3,29 +3,30 @@ package org.inksnow.ankh.economy.api;
 import java.io.IOException;
 import java.math.BigDecimal;
 import org.bukkit.OfflinePlayer;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.inksnow.ankh.economy.config.CurrencyConfig;
 
 public interface EconomyHandle {
 
-  CurrencyConfig config();
+  @NonNull CurrencyConfig config();
 
   void shutdown();
 
-  boolean canReload(CurrencyConfig economyConfig);
+  boolean canReload(@NonNull CurrencyConfig economyConfig);
 
-  void reload(CurrencyConfig economyConfig);
+  void reload(@NonNull CurrencyConfig economyConfig);
 
-  boolean hasAccount(OfflinePlayer player);
+  boolean hasAccount(@NonNull OfflinePlayer player);
 
-  BigDecimal get(OfflinePlayer player);
+  @NonNull BigDecimal get(@NonNull OfflinePlayer player);
 
-  void set(OfflinePlayer player, BigDecimal amount);
+  void set(@NonNull OfflinePlayer player, @NonNull BigDecimal amount);
 
   interface Factory {
 
-    String name();
+    @NonNull String name();
 
-    EconomyHandle create(CurrencyConfig economyConfig)
+    @NonNull EconomyHandle create(@NonNull CurrencyConfig economyConfig)
         throws IOException;
   }
 }
